@@ -161,15 +161,15 @@ public class LinkedList extends Node {
         size--;
     }
 
-    public int getNth(int index) {
+    public Match getNth(int index) {
         checkBounds(index, 0, size - 1);
         Node cur = head;
         for (int i = 0; i < index; ++i) {
             cur = cur.next;
         }
-        return cur.value;
+        return cur.m;
     }
-
+    
     public void checkBounds(int position, int low, int high) {
         if (position > high || position < low) {
             throw new IndexOutOfBoundsException(position + "");
@@ -182,6 +182,10 @@ class Node {
     int value;
 
     Match m;
+    
+    public Match getMatch() {
+        return this.m;
+    }
     
     Node next;
 
