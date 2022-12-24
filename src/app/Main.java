@@ -1,8 +1,5 @@
 package app;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
@@ -10,17 +7,25 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONObject;
 import org.json.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+ 
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
         // Read world cup json data
         JSONArray data;
+        // read json data
         data = readData();
-        int keys[] = new int[64];
+        // read highlights
+        BufferedReader highlights = new BufferedReader(
+            new FileReader("links.txt"));
+        String line;
 
         LinkedList matches = new LinkedList();
-
+        line = highlights.readLine();
         for (int i = 0; i < data.length(); i++) {
             JSONObject home = data.
                     getJSONObject(i)
@@ -44,18 +49,11 @@ public class Main {
                     data.getJSONObject(i).getString("location"),
                     data.getJSONObject(i).getString("winner")
             );
+            m.setHighlights(line);
+            line = highlights.readLine();
             matches.insert(m);
-            //m.print();
-            //matches.print();
-
-            // store keys in array
-            for (int j = 0; j < keys.length; j++) {
-                keys[i] = m.id;
-            }
-
         }
-        matches.insert(null);
-
+        
         Scanner scn = new Scanner(System.in);
         System.out.println("**World Cup Data**");
         System.out.println("1) Search matches using match id");
@@ -94,7 +92,7 @@ public class Main {
 
         } else {
             System.out.println("Match is not found.");
-            System.exit(1);
+            return;
         }
 
     }

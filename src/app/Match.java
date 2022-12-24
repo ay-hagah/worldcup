@@ -7,7 +7,8 @@ public class Match {
     String date;
     String location;
     String winner;
-
+    String highlights;
+    
     public Match(int id, Team home, Team away, String date, String location, String winner) {
         this.id = id;
         this.home = home;
@@ -17,6 +18,10 @@ public class Match {
         this.winner = winner;
     }
 
+    public void setHighlights(String highlights) {
+        this.highlights = highlights;
+    }
+    
     public void print() {
         System.out.println("Match ID: " + id);
         System.out.println("Home:");
@@ -27,6 +32,7 @@ public class Match {
         System.out.println("Date: " + date);
         System.out.println("Location: " + location);
         System.out.println("Winner: " + winner);
+        System.out.println("Highlights: " + this.highlights);
     }
     
     Match() {}

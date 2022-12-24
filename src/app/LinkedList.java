@@ -61,6 +61,7 @@ public class LinkedList extends Node {
     }
 
     public boolean search(int key) {
+        if (key == 0) return true;
         Node cur = head;
         while (cur != null) {
             if (cur.value == key) {
