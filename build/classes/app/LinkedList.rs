@@ -1,2 +1,0 @@
-app.LinkedList
-app.Node

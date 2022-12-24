@@ -42,16 +42,13 @@ public class LinkedList extends Node {
         return size;
     }
 
-
     public Node getHead() {
         return head;
     }
 
- 
     public void setHead(Node head) {
         this.head = head;
     }
-
 
     public int count() {
         int count = 0;
@@ -74,6 +71,16 @@ public class LinkedList extends Node {
         return false;
     }
 
+    public void printAllMatches() {
+        Node cur = head;
+        System.out.println("----- MATCH DATA -----");
+        for (int i = 0; i < count(); i++) {
+            cur.m.print();
+            System.out.println("----------------------");
+            cur = cur.next;
+        }
+    }
+
     @Override
     public String toString() {
         StringJoiner joiner = new StringJoiner("->");
@@ -84,7 +91,6 @@ public class LinkedList extends Node {
         }
         return joiner.toString();
     }
-
 
     public void print() {
         Node temp = head;
@@ -103,6 +109,9 @@ public class LinkedList extends Node {
     }
 
     public void insert(Match data) {
+        if (data == null) {
+            return;
+        }
         value = data.id;
         insertNth(data, size);
     }
@@ -131,7 +140,6 @@ public class LinkedList extends Node {
         size++;
     }
 
-
     public void deleteHead() {
         deleteNth(0);
     }
@@ -156,7 +164,7 @@ public class LinkedList extends Node {
 
         Node destroy = cur.next;
         cur.next = cur.next.next;
-        destroy = null; 
+        destroy = null;
 
         size--;
     }
@@ -169,7 +177,7 @@ public class LinkedList extends Node {
         }
         return cur.m;
     }
-    
+
     public void checkBounds(int position, int low, int high) {
         if (position > high || position < low) {
             throw new IndexOutOfBoundsException(position + "");
@@ -182,20 +190,20 @@ class Node {
     int value;
 
     Match m;
-    
+
     public Match getMatch() {
         return this.m;
     }
-    
+
     Node next;
 
-    Node() {}
+    Node() {
+    }
 
     Node(Match m) {
         this.m = m;
         this.value = m.id;
     }
-
 
     Node(int value, Node next, Match m) {
         this.value = value;
